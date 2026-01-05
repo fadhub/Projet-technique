@@ -75,7 +75,7 @@ Ce projet technique a pour objectif d'appliquer les connaissances acquises et de
 
 ---
 
-# Besoins
+# Analyse technique 
 
 ## Objectifs d'Apprentissage
 - **Réaliser le CRUD** (Create, Read, Update, Delete) complet.
