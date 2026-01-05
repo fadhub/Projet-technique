@@ -97,3 +97,45 @@ Ce projet technique a pour objectif d'appliquer les connaissances acquises et de
 ![center](img_presentation/use_case.png)
 
 
+
+---
+
+# Conception
+
+## Diagramme de Classes
+
+<div class="mermaid">
+classDiagram
+    class Task {
+        +int id
+        +string title
+        +text description
+        +string image
+        +boolean is_completed
+        +int user_id
+        +timestamp created_at
+        +timestamp updated_at
+    }
+
+    class Category {
+        +int id
+        +string name
+        +timestamp created_at
+        +timestamp updated_at
+    }
+
+    class User {
+        +int id
+        +string name
+        +string email
+        +timestamp created_at
+        +timestamp updated_at
+    }
+
+    Category "0..*" -- "0..*" Task : appartient à
+    User "1" -- "0..*" Task : possède
+
+
+
+
+</div>
