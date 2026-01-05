@@ -7,7 +7,6 @@ style: |
     color: #2b3a42;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
-  /* Style global pour les titres */
   h1 {
     color: #2c3e50;
     font-size: 3em; 
@@ -16,8 +15,6 @@ style: |
     color: #e67e22;
     font-size: 2em;
   }
-  
-  /* Style spécifique pour la page de garde via la classe 'lead' de Marp ou custom */
   section.title-slide {
     display: flex;
     flex-direction: column;
@@ -26,18 +23,15 @@ style: |
     text-align: center;
     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   }
-  
   section.title-slide h1 {
     font-size: 3.5em;
     margin-bottom: 0.2em;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
   }
-  
   section.title-slide h2 {
     margin-bottom: 1em;
     color: #d35400;
   }
-
   .info-box {
     background: rgba(255, 255, 255, 0.8);
     padding: 20px;
@@ -46,7 +40,6 @@ style: |
     margin-top: 30px;
     text-align: left;
   }
-  
   .info-box strong {
     display: block;
     margin: 10px 0;
@@ -68,3 +61,14 @@ style: |
 **Date : 06/01/2026**
 
 </div>
+
+---
+
+## Contexte
+Ce projet technique a pour objectif d'appliquer les connaissances acquises et de valider notre compréhension.
+
+#### Processus de Développement : 2TUP
+
+![center h:380](img_presentation/2TUP.png)
+
+
