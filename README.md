@@ -75,6 +75,7 @@ Ce projet technique a pour objectif d'appliquer les connaissances acquises et de
 
 ---
 
+
 # Technologies à Utilisée
 
 
@@ -89,6 +90,10 @@ Ce projet technique a pour objectif d'appliquer les connaissances acquises et de
 9. **Vite** : Optimisation des performances.
 10. **Preline UI** : Intégration d'un design système moderne.
 11. **Lucide Library**
+12. **Tailwind CSS** : Framework CSS utilitaire pour un design réactif et moderne.
+---
+# Fonctionnalités
 
+![center](img_presentation/use_case.png)
 
 
