@@ -78,12 +78,12 @@ Ce projet technique a pour objectif d'appliquer les connaissances acquises et de
 # Technologies à Utilisées
 
 
-- **Eloquent ORM** : Gestion optimisée de la base de données.
-- **Architecture MVC** : Structuration claire du code.
-- **Gestion des Images** : Upload et stockage sécurisé.
-- **Preline UI** : Intégration d'un design système moderne.
-- **AJAX** : Interactivité fluide sans rechargement.
-- **Internationalisation** : Support multilingue de l'interface.
-- **Services** : Isolation de la logique métier.
+1. **Eloquent ORM** : Gestion optimisée de la base de données.
+2. **Architecture MVC** : Structuration claire du code.
+3. **Gestion des Images** : Upload et stockage sécurisé.
+4. **Preline UI** : Intégration d'un design système moderne.
+5. **AJAX** : Interactivité fluide sans rechargement.
+6. **Internationalisation** : Support multilingue de l'interface.
+7. **Services** : Isolation de la logique métier.
 
 
