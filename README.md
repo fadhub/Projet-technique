@@ -72,3 +72,16 @@ Ce projet technique a pour objectif d'appliquer les connaissances acquises et de
 ![center h:380](img_presentation/2TUP.png)
 
 
+
+---
+
+# Besoins
+
+## Objectifs d'Apprentissage
+- **Réaliser le CRUD** (Create, Read, Update, Delete) complet.
+- **Travailler sur des Labs** pour la pratique.
+- **Gérer l'upload d'images** et le stockage.
+- **Intégrer Preline UI** pour le design.
+- **Maîtriser les requêtes AJAX** pour l'interactivité.
+
+
