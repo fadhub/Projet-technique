@@ -78,7 +78,7 @@ Ce projet technique a pour objectif d'appliquer les connaissances acquises et de
 # Analyse technique 
 
 ## Objectifs d'Apprentissage
-- **Réaliser le CRUD** (Create, Read, Update, Delete) complet.
+- **Réaliser le CRUD** .
 - **Travailler sur des Labs** pour la pratique.
 - **Gérer l'upload d'images** et le stockage.
 - **Intégrer Preline UI** pour le design.
