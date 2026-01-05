@@ -75,13 +75,15 @@ Ce projet technique a pour objectif d'appliquer les connaissances acquises et de
 
 ---
 
-# Analyse technique 
+# Technologies à Utilisées
 
-## Objectifs d'Apprentissage
-- **Réaliser le CRUD** .
-- **Travailler sur des Labs** pour la pratique.
-- **Gérer l'upload d'images** et le stockage.
-- **Intégrer Preline UI** pour le design.
-- **Maîtriser les requêtes AJAX** pour l'interactivité.
+
+- **Eloquent ORM** : Gestion optimisée de la base de données.
+- **Architecture MVC** : Structuration claire du code.
+- **Gestion des Images** : Upload et stockage sécurisé.
+- **Preline UI** : Intégration d'un design système moderne.
+- **AJAX** : Interactivité fluide sans rechargement.
+- **Internationalisation** : Support multilingue de l'interface.
+- **Services** : Isolation de la logique métier.
 
 
