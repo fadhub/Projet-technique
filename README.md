@@ -64,6 +64,12 @@ style: |
 
 ---
 
+# Waterfall
+
+![center h:380](img_presentation/Waterfall.webp)
+
+---
+
 ## Contexte
 Ce projet technique a pour objectif d'appliquer les connaissances acquises et de valider notre compréhension.
 
@@ -76,7 +82,9 @@ Ce projet technique a pour objectif d'appliquer les connaissances acquises et de
 ---
 
 
-# Technologies à Utilisée
+# Exigences - Analyse Technique
+
+## Technologies Utilisées
 
 
 1. **Base de données** : Mysql.
@@ -92,7 +100,7 @@ Ce projet technique a pour objectif d'appliquer les connaissances acquises et de
 11. **Lucide Library**
 12. **Tailwind CSS** : Framework CSS utilitaire pour un design réactif et moderne.
 ---
-# Fonctionnalités
+# Analyse - Fonctionnalités
 
 ![center](img_presentation/use_case.png)
 
