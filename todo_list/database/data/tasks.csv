@@ -1,0 +1,9 @@
+id,title,description,image,is_completed,user_id,created_at,updated_at
+1,Installer Laravel,Installation initiale du framework Laravel pour le projet.,null,1,1,2026-01-06 09:00:00,2026-01-06 09:30:00
+2,Configurer la base de données,Création de la base de données MySQL et configuration du fichier .env.,null,1,1,2026-01-06 09:30:00,2026-01-06 10:00:00
+3,Créer les modèles et migrations,Définition des schémas pour Users, Tasks et Categories.,null,1,1,2026-01-06 10:00:00,2026-01-06 11:00:00
+4,Implémenter le contrôleur des tâches,Développement des méthodes CRUD pour la gestion des tâches.,null,0,1,2026-01-06 11:00:00,2026-01-06 11:00:00
+5,Concevoir l'interface utilisateur,Utilisation de Tailwind CSS et Blade pour créer une interface moderne.,null,0,1,2026-01-06 11:30:00,2026-01-06 11:30:00
+6,Ajouter la recherche AJAX,Implémentation d'une barre de recherche dynamique sans rechargement de page.,null,0,1,2026-01-06 12:00:00,2026-01-06 12:00:00
+7,Gérer l'authentification,Mise en place du système de connexion et d'inscription.,null,0,1,2026-01-06 12:15:00,2026-01-06 12:15:00
+8,Valider avec Marp,Préparer le README.md avec Marp pour la présentation.,null,1,1,2026-01-06 10:00:00,2026-01-06 12:00:00
