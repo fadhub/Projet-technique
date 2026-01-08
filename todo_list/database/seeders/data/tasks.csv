@@ -1,4 +1,4 @@
 title,description,image,is_completed,user_id,created_at,updated_at,categories
-Installer Laravel,Installation initiale du framework Laravel pour le projet.,tasks/laravel_inst.jpg,1,1,2026-01-06 09:00:00,2026-01-06 09:30:00,Urgent-Personnel
-Ajouter la recherche AJAX,Implémentation d'une barre de recherche dynamique sans rechargement de page.,tasks/ajax_laravel.jpg,0,1,2026-01-06 12:00:00,2026-01-06 12:00:00,Études-Personnel
-Gérer l'authentification,Mise en place du système de connexion et d'inscription.,tasks/authen.jpg,0,2,2026-01-06 12:15:00,2026-01-06 12:15:00,Personnel-Travail
+Installer Laravel,Installation initiale du framework Laravel pour le projet.,tasks/laravel_inst.jpg,1,1,2026-01-06 09:00:00,2026-01-06 09:30:00,Urgent|Personnel
+Ajouter la recherche AJAX,Implémentation d'une barre de recherche dynamique sans rechargement de page.,tasks/ajax_laravel.jpg,0,1,2026-01-06 12:00:00,2026-01-06 12:00:00,Études|Personnel
+Gérer l'authentification,Mise en place du système de connexion et d'inscription.,tasks/authen.jpg,0,2,2026-01-06 12:15:00,2026-01-06 12:15:00,Personnel|Travail
