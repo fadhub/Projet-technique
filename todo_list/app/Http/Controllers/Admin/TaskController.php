@@ -3,64 +3,95 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Task;
+use App\Services\TaskService;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    protected $taskService;
+
+    public function __construct(TaskService $taskService)
     {
-        //
+        $this->taskService = $taskService;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    public function index(Request $request)
+    {
+        $categoryId = $request->query('category_id');
+        $search = $request->query('search');
+        $tasks = $this->taskService->index(10, $categoryId, $search);
+        
+        if ($request->ajax()) {
+            return view('admin.tasks._table', compact('tasks'))->render();
+        }
+
+        $categories = Category::all();
+        return view('admin.tasks.index', compact('tasks', 'categories'));
+    }
+
     public function create()
     {
-        //
+        $categories = Category::all();
+        return view('admin.tasks.create', compact('categories'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'category_ids' => 'nullable|array',
+            'category_ids.*' => 'exists:categories,id',
+        ]);
+
+        $data['user_id'] = auth()->id() ?? \App\Models\User::first()->id; // Fallback to first user for demo/testing
+        $task = $this->taskService->store($data);
+
+        if (!empty($data['category_ids'])) {
+            $task->categories()->sync($data['category_ids']);
+        }
+
+        return redirect()->route('admin.tasks.index')->with('success', 'Task created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Task $task)
+    public function show($id)
     {
-        //
+        $task = $this->taskService->show($id);
+        return view('admin.tasks.show', compact('task'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Task $task)
+    public function edit($id)
     {
-        //
+        $task = $this->taskService->show($id);
+        $categories = Category::all();
+        $selectedCategories = $task->categories->pluck('id')->toArray();
+        return view('admin.tasks.edit', compact('task', 'categories', 'selectedCategories'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Task $task)
+    public function update(Request $request, $id)
     {
-        //
+        $data = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'category_ids' => 'nullable|array',
+            'category_ids.*' => 'exists:categories,id',
+        ]);
+
+        $task = $this->taskService->update($id, $data);
+
+        if (isset($data['category_ids'])) {
+            $task->categories()->sync($data['category_ids']);
+        }
+
+        return redirect()->route('admin.tasks.index')->with('success', 'Task updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Task $task)
+    public function destroy($id)
     {
-        //
+        $this->taskService->delete($id);
+        return redirect()->route('admin.tasks.index')->with('success', 'Task deleted successfully.');
     }
 }

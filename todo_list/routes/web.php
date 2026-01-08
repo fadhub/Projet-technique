@@ -1,40 +1,22 @@
-<?php
+﻿<?php
 
-use App\Models\Category;
-use App\Services\TaskService;
-use Illuminate\Http\Request;
+
+use App\Http\Controllers\PublicTaskController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function (Request $request, TaskService $taskService) {
-    if ($request->isMethod('post')) {
-        return redirect()->route('tasks.store');
-    }
-    $categoryId = $request->get('category_id');
-    $tasks = $taskService->index(9, $categoryId);
-    $categories = Category::all();
+// Routes publiques
+Route::controller(PublicTaskController::class)->group(function () {
+    // Page d'accueil - Liste des tâches
+    Route::get('/', 'index')->name('tasks.index');
+    
+    // Page de détail d'une tâche
+    Route::get('/tasks/{id}', 'show')->name('tasks.show');
 
-    return view('tasks.index', compact('tasks', 'categories', 'categoryId'));
-})->name('tasks.index');
+    // Route to handle form submission (fixes Route [tasks.store] not defined)
+    Route::post('/tasks', 'store')->name('tasks.store');
+});
 
-Route::get('/tasks/{id}', function ($id, TaskService $taskService) {
-    $task = $taskService->show($id);
-    return view('tasks.show', compact('task'));
-})->name('tasks.show');
-
-Route::post('/tasks', function (Request $request, TaskService $taskService) {
-    $validated = $request->validate([
-        'title' => 'required|string|max:255',
-        'description' => 'nullable|string',
-        'category_id' => 'required|exists:categories,id',
-    ]);
-
-    $task = $taskService->store([
-        'title' => $validated['title'],
-        'description' => $validated['description'],
-        'user_id' => 1, // Default user
-    ]);
-
-    $task->categories()->attach($validated['category_id']);
-
-    return redirect()->route('tasks.index')->with('success', 'Tâche ajoutée avec succès !');
-})->name('tasks.store');
+// Admin Routes
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('tasks', \App\Http\Controllers\Admin\TaskController::class);
+});

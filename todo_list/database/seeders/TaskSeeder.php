@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Task;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class TaskSeeder extends Seeder
 {
@@ -15,6 +14,10 @@ class TaskSeeder extends Seeder
         $header = array_shift($rows);
 
         foreach ($rows as $row) {
+            if (count($header) !== count($row)) {
+                continue;
+            }
+
             $data = array_combine($header, $row);
 
             $task = Task::create([
@@ -27,9 +30,17 @@ class TaskSeeder extends Seeder
                 'updated_at'   => $data['updated_at'],
             ]);
 
-            // Relation many-to-many
-            if (!empty($data['category_id'])) {
-                $task->categories()->syncWithoutDetaching([$data['category_id']]);
+            /** ===============================
+             *  Gestion des catégories (N:N)
+             *  =============================== */
+            if (!empty($data['categories'])) {
+                // Split by common separators: , ; | : -
+                $categoryNames = preg_split('/\s*[,;|:\-]\s*/', $data['categories']);
+                
+                foreach ($categoryNames as $name) {
+                    $category = \App\Models\Category::firstOrCreate(['name' => $name]);
+                    $task->categories()->attach($category->id);
+                }
             }
         }
     }

@@ -29,6 +29,12 @@
                 @endif
             </div>
 
+            @if($task->image)
+                <div class="mb-8 rounded-2xl overflow-hidden">
+                    <img src="{{ asset('storage/' . $task->image) }}" alt="{{ $task->title }}" class="w-full h-auto object-cover">
+                </div>
+            @endif
+
             <h1 class="text-4xl font-extrabold text-gray-900 mb-6 leading-tight">{{ $task->title }}</h1>
             
             <div class="prose prose-blue max-w-none text-gray-600 text-lg mb-12">
