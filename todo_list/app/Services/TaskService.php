@@ -8,11 +8,19 @@ use Illuminate\Pagination\LengthAwarePaginator;
 class TaskService
 {
     /**
-     * Get paginated tasks.
+     * Get paginated tasks with optional category filtering.
      */
-    public function index(int $perPage = 10): LengthAwarePaginator
+    public function index(int $perPage = 10, ?int $categoryId = null): LengthAwarePaginator
     {
-        return Task::paginate($perPage);
+        $query = Task::query();
+
+        if ($categoryId) {
+            $query->whereHas('categories', function ($q) use ($categoryId) {
+                $q->where('categories.id', $categoryId);
+            });
+        }
+
+        return $query->paginate($perPage);
     }
 
     /**

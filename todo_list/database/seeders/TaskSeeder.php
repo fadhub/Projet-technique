@@ -4,32 +4,33 @@ namespace Database\Seeders;
 
 use App\Models\Task;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class TaskSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        $file = fopen(database_path('data/tasks.csv'), 'r');
-        
-        // Skip header
-        fgetcsv($file);
+        $file = database_path('seeders/data/tasks.csv');
+        $rows = array_map('str_getcsv', file($file));
+        $header = array_shift($rows);
 
-        while (($data = fgetcsv($file)) !== FALSE) {
-            Task::create([
-                'id' => $data[0],
-                'title' => $data[1],
-                'description' => $data[2] === 'null' ? null : $data[2],
-                'image' => $data[3] === 'null' ? null : $data[3],
-                'is_completed' => (bool) $data[4],
-                'user_id' => $data[5],
-                'created_at' => $data[6],
-                'updated_at' => $data[7],
+        foreach ($rows as $row) {
+            $data = array_combine($header, $row);
+
+            $task = Task::create([
+                'title'        => $data['title'],
+                'description'  => $data['description'] === 'null' ? null : $data['description'],
+                'image'        => $data['image'] === 'null' ? null : $data['image'],
+                'is_completed' => (bool) $data['is_completed'],
+                'user_id'      => $data['user_id'],
+                'created_at'   => $data['created_at'],
+                'updated_at'   => $data['updated_at'],
             ]);
-        }
 
-        fclose($file);
+            // Relation many-to-many
+            if (!empty($data['category_id'])) {
+                $task->categories()->syncWithoutDetaching([$data['category_id']]);
+            }
+        }
     }
 }

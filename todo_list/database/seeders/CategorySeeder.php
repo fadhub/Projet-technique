@@ -7,25 +7,18 @@ use Illuminate\Database\Seeder;
 
 class CategorySeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        $file = fopen(database_path('data/categories.csv'), 'r');
-        
-        // Skip header
-        fgetcsv($file);
+        $file = database_path('seeders/data/categories.csv');
+        $rows = array_map('str_getcsv', file($file));
+        $header = array_shift($rows);
 
-        while (($data = fgetcsv($file)) !== FALSE) {
-            Category::create([
-                'id' => $data[0],
-                'name' => $data[1],
-                'created_at' => $data[2],
-                'updated_at' => $data[3],
-            ]);
+        foreach ($rows as $row) {
+            $data = array_combine($header, $row);
+
+            Category::firstOrCreate(
+                ['name' => $data['name']]
+            );
         }
-
-        fclose($file);
     }
 }

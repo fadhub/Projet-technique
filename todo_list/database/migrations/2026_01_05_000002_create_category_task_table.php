@@ -15,6 +15,8 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained()->cascadeOnDelete();
             $table->foreignId('task_id')->constrained()->cascadeOnDelete();
             $table->primary(['category_id', 'task_id']);
+            // pivot timestamps used by Eloquent when using ->withTimestamps()
+            $table->timestamps();
         });
     }
 

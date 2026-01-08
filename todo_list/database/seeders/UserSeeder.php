@@ -2,33 +2,28 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 use Illuminate\Database\Seeder;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        $file = fopen(database_path('data/users.csv'), 'r');
-        
-        // Skip header
-        fgetcsv($file);
+        $file = database_path('seeders/data/users.csv');
+        $rows = array_map('str_getcsv', file($file));
+        $header = array_shift($rows);
 
-        while (($data = fgetcsv($file)) !== FALSE) {
-            User::create([
-                'id' => $data[0],
-                'name' => $data[1],
-                'email' => $data[2],
-                'password' => $data[3],
-                'created_at' => $data[4],
-                'updated_at' => $data[5],
-            ]);
+        foreach ($rows as $row) {
+            $data = array_combine($header, $row);
+
+            User::firstOrCreate(
+                ['email' => $data['email']],  
+                [
+                    'name' => $data['name'],
+                    'password' => Hash::make($data['password']),
+                ]
+            );
         }
-
-        fclose($file);
     }
 }
