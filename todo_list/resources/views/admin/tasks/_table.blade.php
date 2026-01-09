@@ -24,9 +24,15 @@
         </td>
         <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
             <div class="flex justify-end items-center gap-x-2">
-                <a href="{{ route('admin.tasks.edit', $task->id) }}" class="p-2 text-gray-500 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors" title="Modifier">
+                <button type="button" 
+                        class="p-2 text-gray-500 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors open-edit-modal" 
+                        title="Modifier"
+                        data-id="{{ $task->id }}"
+                        data-title="{{ $task->title }}"
+                        data-description="{{ $task->description }}"
+                        data-categories="{{ json_encode($task->categories->pluck('id')) }}">
                     <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
-                </a>
+                </button>
                 <form action="{{ route('admin.tasks.destroy', $task->id) }}" method="POST" onsubmit="return confirm('Supprimer cette tâche ?')" class="inline">
                     @csrf
                     @method('DELETE')
@@ -49,4 +55,3 @@
         </td>
     </tr>
 @endforelse
-

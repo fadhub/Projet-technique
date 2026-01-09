@@ -90,18 +90,8 @@
         <!-- Header -->
         <header class="sticky top-0 z-40 flex w-full bg-white border-b border-gray-200 py-2.5 sm:py-4">
             <nav class="w-full mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-                <div class="flex items-center gap-x-3">
-                    <div class="relative">
-                        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                            <svg class="flex-shrink-0 w-4 h-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-                        </div>
-                        <input type="text" id="globalSearchInput" class="py-2.5 ps-10 pe-4 block w-64 md:w-96 border-0 focus:ring-0 text-sm placeholder-gray-400" placeholder="Rechercher...">
-                    </div>
-                </div>
+                <div></div>
 
-                <div class="flex items-center gap-x-3">
-                    <img src="https://images.unsplash.com/photo-1531927557220-a9e23c1e4794?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80" alt="Avatar" class="w-8 h-8 rounded-full">
-                </div>
             </nav>
         </header>
 

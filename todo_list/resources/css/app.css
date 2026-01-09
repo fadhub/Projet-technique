@@ -9,3 +9,29 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+.language-switcher {
+    display: inline-block;
+    margin-left: 20px;
+    font-size: 14px;
+}
+
+.language-switcher a {
+    color: #6c757d;
+    text-decoration: none;
+    padding: 0 5px;
+    transition: color 0.3s;
+}
+
+.language-switcher a:hover {
+    color: #007bff;
+}
+
+.language-switcher a.active {
+    color: #007bff;
+    font-weight: bold;
+}
+
+.language-switcher span {
+    color: #dee2e6;
+    padding: 0 5px;
+}

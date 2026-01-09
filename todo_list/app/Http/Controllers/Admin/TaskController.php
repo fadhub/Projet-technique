@@ -20,7 +20,7 @@ class TaskController extends Controller
     {
         $categoryId = $request->query('category_id');
         $search = $request->query('search');
-        $tasks = $this->taskService->index(10, $categoryId, $search);
+        $tasks = $this->taskService->index(2, $categoryId, $search);
         
         if ($request->ajax()) {
             return view('admin.tasks._table', compact('tasks'))->render();

@@ -24,8 +24,13 @@
                         TodoHub
                     </a>
                 </div>
-                <div class="flex items-center space-x-4">
-                    <!-- Bouton d'ajout supprimé pour partie publique (lecture seule) -->
+                <div class="flex items-center space-x-6">
+                    <div class="flex items-center space-x-2">
+                        @include('partials.language_switcher')
+                    </div>
+                    <a href="{{ route('admin.tasks.index') }}" class="text-sm font-semibold text-gray-600 hover:text-blue-600 transition-colors">
+                        Administration
+                    </a>
                 </div>
             </div>
         </div>
