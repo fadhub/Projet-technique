@@ -18,15 +18,12 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function fetchTasks(search, categoryId) {
-        const url = new URL(window.location.href);
-        url.searchParams.set('search', search);
-        if (categoryId) {
-            url.searchParams.set('category_id', categoryId);
-        } else {
-            url.searchParams.delete('category_id');
-        }
+        const fetchUrl = new URL(window.location.protocol + '//' + window.location.host + window.location.pathname);
 
-        fetch(url, {
+        if (search) fetchUrl.searchParams.set('search', search);
+        if (categoryId) fetchUrl.searchParams.set('category_id', categoryId);
+
+        fetch(fetchUrl, {
             headers: {
                 'X-Requested-With': 'XMLHttpRequest'
             }
@@ -37,29 +34,5 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .catch(error => console.error('Error fetching tasks:', error));
     }
-
-    // Modal Logic
-    const openModalBtn = document.getElementById('openModalBtn');
-    const closeModalBtn = document.getElementById('closeModalBtn');
-    const cancelModalBtn = document.getElementById('cancelModalBtn');
-    const addTaskModal = document.getElementById('addTaskModal');
-
-    if (openModalBtn && addTaskModal) {
-        openModalBtn.addEventListener('click', () => {
-            addTaskModal.style.display = 'flex';
-        });
-
-        const closeModal = () => {
-            addTaskModal.style.display = 'none';
-        };
-
-        if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
-        if (cancelModalBtn) cancelModalBtn.addEventListener('click', closeModal);
-
-        window.addEventListener('click', (event) => {
-            if (event.target === addTaskModal) {
-                closeModal();
-            }
-        });
-    }
 });
+
