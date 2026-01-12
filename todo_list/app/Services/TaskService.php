@@ -8,39 +8,47 @@ use Illuminate\Support\Facades\Storage;
 
 class TaskService
 {
-    public function index(int $perPage = 10, ?int $categoryId = null, ?string $search = null): LengthAwarePaginator
-    {
-        $query = Task::query();
 
-        if ($categoryId) {
-            $query->whereHas('categories', function ($q) use ($categoryId) {
-                $q->where('categories.id', $categoryId);
+    private const PER_PAGE = 10;
+
+    public function getAll(array $filters = []): LengthAwarePaginator
+    {
+        $query = Task::query()->with(['user', 'categories']);
+
+        //  Recherche (title + description)
+        if (!empty($filters['search'])) {
+            $query->where(function ($q) use ($filters) {
+                $q->where('title', 'like', '%' . $filters['search'] . '%')
+                  ->orWhere('description', 'like', '%' . $filters['search'] . '%');
             });
         }
 
-        if ($search) {
-            $query->where('title', 'like', '%' . $search . '%');
+        // Filtrer par catégorie
+        if (!empty($filters['category_id'])) {
+            $query->whereHas('categories', function ($q) use ($filters) {
+                $q->where('categories.id', $filters['category_id']);
+            });
         }
 
-        return $query->with(['user', 'categories'])->paginate($perPage);
+        // Pagination
+        return $query->latest()->paginate(self::PER_PAGE);
     }
 
-    public function show(int $id): Task
-    {
-        return Task::with(['user', 'categories'])->findOrFail($id);
+    public function create(array $data): Task
+{
+    if (!empty($data['image'])) {
+        $data['image'] = $data['image']->store('tasks', 'public');
     }
 
-    public function store(array $data): Task
-    {
+    $task = Task::create($data);
 
-        // Upload image si elle existe
-        if(!empty($data['image'])){
-            $data['image'] = $data['image']->store('tasks', 'public');
-        }
-
-
-        return Task::create($data);
+    if (isset($data['categories'])) {
+        $task->categories()->sync($data['categories']);
     }
+
+    return $task->load(['user', 'categories']);
+}
+
 
     public function update(int $id, array $data): Task
     {
