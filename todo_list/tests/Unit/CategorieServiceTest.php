@@ -21,7 +21,7 @@ class CategorieServiceTest extends TestCase
 
     public function test_it_can_get_all_categories()
     {
-        // Act
+        // recuperation
         $categories = $this->service->getAll();
 
         // Assert
