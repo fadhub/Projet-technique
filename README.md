@@ -3,17 +3,19 @@ marp: true
 theme: default
 style: |
   section {
-    background-color: #fcfcfc;
-    color: #2b3a42;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #ffffff;
+    color: #333333;
+    font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
   }
   h1 {
-    color: #2c3e50;
-    font-size: 3em; 
+    color: #1a202c;
+    font-size: 1.6em;
+    font-weight: 600;
   }
   h2 {
-    color: #e67e22;
-    font-size: 2em;
+    color: #4a5568;
+    font-size: 1.5em;
+    font-weight: 300;
   }
   section.title-slide {
     display: flex;
@@ -21,46 +23,67 @@ style: |
     justify-content: center;
     align-items: center;
     text-align: center;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background: #ffffff;
   }
   section.title-slide h1 {
-    font-size: 3.5em;
-    margin-bottom: 0.2em;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    font-size: 1.6em;
+    margin-bottom: 0.5em;
+    color: #2d3748;
+    text-transform: uppercase;
+    letter-spacing: 2px;
   }
   section.title-slide h2 {
-    margin-bottom: 1em;
-    color: #d35400;
+    margin-bottom: 3em;
+    color: #718096;
+    font-size: 1.4em;
+    font-weight: 300;
   }
   .info-box {
-    background: rgba(255, 255, 255, 0.8);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    margin-top: 30px;
+    padding: 20px 0;
+    margin-top: 20px;
     text-align: left;
   }
   .info-box strong {
-    display: block;
-    margin: 10px 0;
-    font-size: 1.1em;
-    color: #34495e;
+    display: inline-block;
+    width: 180px;
+    margin: 8px 0;
+    font-size: 1em;
+    color: #718096;
+    font-weight: 500;
+  }
+  .info-box span {
+    font-weight: 600;
+    color: #2d3748;
   }
 ---
 
-<!-- _class: title-slide -->
 
-# Choix de sujet
 
-## Sujet : Projet Todo List
+# **Présentation Projet-technique**
+
+## Application de gestion de tâches
 
 <div class="info-box">
 
-**Présentée par : Fadna Lakhouchen**
-**Encadré par : M. ESSARRAJ FOUAD**
-**Date : 06/01/2026**
+**Réalisé par :** <span>Fadna Lakhouchen</span>
+**Encadré par :** <span>M. ESSARRAJ FOUAD</span>
+
 
 </div>
+
+---
+## Choix du sujet
+
+ gestion de tâches simple et efficace pour organiser vos activités quotidiennes.
+
+---
+
+
+## La méthode Waterfall (En cascade)
+
+![w:900 Waterfall](img_presentation/Waterfall.png)
+
+
 
 ---
 
@@ -76,7 +99,7 @@ Ce projet technique a pour objectif d'appliquer les connaissances acquises et de
 ---
 
 
-# Technologies à Utilisée
+## Technologies à Utilisée
 
 
 1. **Base de données** : Mysql.
@@ -92,7 +115,7 @@ Ce projet technique a pour objectif d'appliquer les connaissances acquises et de
 11. **Lucide Library**
 12. **Tailwind CSS** : Framework CSS utilitaire pour un design réactif et moderne.
 ---
-# Fonctionnalités
+## Fonctionnalités
 
 ![center](img_presentation/use_case.png)
 
@@ -100,13 +123,13 @@ Ce projet technique a pour objectif d'appliquer les connaissances acquises et de
 
 ---
 
-# Conception
+## Conception
 ![center h:450](img_presentation/diagramme_class.png)
 
 
 ---
 
-# Sujet Live Coding
+## Sujet Live Coding
 
 - Ajouter avec un pop-up modal (AJAX).
 - Rechercher les tâches.
