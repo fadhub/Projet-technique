@@ -81,7 +81,7 @@ style: |
 
 ## La méthode Waterfall (En cascade)
 
-![w:900 Waterfall](img_presentation/waterfall.Webp)
+![w:900 Waterfall](img_presentation/Waterfall.png)
 
 
 
