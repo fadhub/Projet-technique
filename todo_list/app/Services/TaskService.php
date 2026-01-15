@@ -32,14 +32,18 @@ class TaskService
 
     public function store(array $data): Task
     {
-
         // Upload image si elle existe
         if(!empty($data['image'])){
             $data['image'] = $data['image']->store('tasks', 'public');
         }
 
+        $task = Task::create(collect($data)->except('categories')->toArray());
 
-        return Task::create($data);
+        if (!empty($data['categories'])) {
+            $task->categories()->sync($data['categories']);
+        }
+
+        return $task->load('categories');
     }
 
     public function update(int $id, array $data): Task
