@@ -78,15 +78,14 @@ return [
     |
     */
 
-    'locale' => env('APP_LOCALE', 'en'),
+    'locale' => env('APP_LOCALE', 'fr'),
 
     'fallback_locale' => env('APP_FALLBACK_LOCALE', 'en'),
 
-    'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
+    'faker_locale' => env('APP_FAKER_LOCALE', 'fr_FR'),
 
     'locale' => 'fr', // Langue par défaut
-'fallback_locale' => 'en', // Langue de secours
-'available_locales' => ['fr', 'en'], // Langues disponibles
+    'available_locales' => ['fr', 'en'], // Langues disponibles
 
     /*
     |--------------------------------------------------------------------------
