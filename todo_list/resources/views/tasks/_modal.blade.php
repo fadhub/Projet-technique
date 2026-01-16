@@ -30,7 +30,6 @@
 </div>
 
 <style>
-  /* Fix total pour Preline + CDN Tailwind */
   .hs-overlay.open {
     display: block !important;
     opacity: 1 !important;

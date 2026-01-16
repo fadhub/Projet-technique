@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Todo Admin</title>
-    <!-- Preline & Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/preline@latest/dist/preline.js"></script>
     <script src="{{ asset('js/tasks.js') }}" defer></script>

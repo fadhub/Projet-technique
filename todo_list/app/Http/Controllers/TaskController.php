@@ -51,7 +51,7 @@ class TaskController extends Controller
 
         $data['is_completed'] = $request->has('is_completed');
 
-        // Assign a default user (since no auth) return first user or 1
+        
         $data['user_id'] = User::first()->id ?? 1;
 
         try {
