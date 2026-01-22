@@ -84,9 +84,7 @@ return [
 
     'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
 
-    'locale' => 'fr', // Langue par défaut
-'fallback_locale' => 'en', // Langue de secours
-'available_locales' => ['fr', 'en'], // Langues disponibles
+    'available_locales' => ['fr', 'en'], // Langues disponibles
 
     /*
     |--------------------------------------------------------------------------

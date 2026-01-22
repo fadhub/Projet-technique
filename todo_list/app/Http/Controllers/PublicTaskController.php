@@ -19,7 +19,7 @@ class PublicTaskController extends Controller
      */
     public function index()
     {
-        $tasks = $this->taskService->index(9);
+        $tasks = $this->taskService->getAll([], 9);
         return view('public.home', compact('tasks'));
     }
 

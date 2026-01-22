@@ -16,20 +16,11 @@ class Task extends Model
         'description',
         'image',
         'is_completed',
-        'user_id',
     ];
 
     protected $casts = [
         'is_completed' => 'boolean',
     ];
-
-    /**
-     * Get the user that owns the task.
-     */
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
 
     /**
      * The categories that belong to the task.

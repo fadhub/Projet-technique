@@ -11,9 +11,9 @@ class TaskService
 
     private const PER_PAGE = 10;
 
-    public function getAll(array $filters = []): LengthAwarePaginator
+    public function getAll(array $filters = [], int $perPage = self::PER_PAGE): LengthAwarePaginator
     {
-        $query = Task::query()->with(['user', 'categories']);
+        $query = Task::query()->with(['categories']);
 
         //  Recherche (title + description)
         if (!empty($filters['search'])) {
@@ -30,31 +30,41 @@ class TaskService
             });
         }
 
+        // Filtrer par statut
+        if (isset($filters['is_completed']) && $filters['is_completed'] !== '') {
+            $query->where('is_completed', $filters['is_completed']);
+        }
+
         // Pagination
-        return $query->latest()->paginate(self::PER_PAGE);
+        return $query->latest()->paginate($perPage);
+    }
+
+    public function show(int $id): Task
+    {
+        return Task::with(['categories'])->findOrFail($id);
     }
 
     public function create(array $data): Task
-{
-    if (!empty($data['image'])) {
-        $data['image'] = $data['image']->store('tasks', 'public');
+    {
+        if (!empty($data['image'])) {
+            $data['image'] = $data['image']->store('tasks', 'public');
+        }
+
+        $task = Task::create(collect($data)->except(['category_id', 'categories'])->toArray());
+
+        if (isset($data['category_id'])) {
+            $task->categories()->sync([$data['category_id']]);
+        } elseif (isset($data['categories'])) {
+            $task->categories()->sync($data['categories']);
+        }
+
+        return $task->load(['categories']);
     }
-
-    $task = Task::create($data);
-
-    if (isset($data['categories'])) {
-        $task->categories()->sync($data['categories']);
-    }
-
-    return $task->load(['user', 'categories']);
-}
-
 
     public function update(int $id, array $data): Task
     {
         $task = Task::findOrFail($id);
 
-        // Mettre à jour le chemin de l'image si besoin
         if (isset($data['image'])) {
             if ($task->image) {
                 Storage::disk('public')->delete($task->image);
@@ -62,9 +72,15 @@ class TaskService
             $task->image = $data['image']->store('tasks', 'public');
         }
 
-        $task->update(collect($data)->except('image')->toArray());
+        $task->update(collect($data)->except(['image', 'category_id', 'categories'])->toArray());
 
-        return $task->refresh();
+        if (isset($data['category_id'])) {
+            $task->categories()->sync([$data['category_id']]);
+        } elseif (isset($data['categories'])) {
+            $task->categories()->sync($data['categories']);
+        }
+
+        return $task->load(['categories']);
     }
 
     public function delete(int $id): bool
@@ -74,5 +90,13 @@ class TaskService
             Storage::disk('public')->delete($task->image);
         }
         return (bool) $task->delete();
+    }
+
+    public function toggleStatus(int $id): Task
+    {
+        $task = Task::findOrFail($id);
+        $task->is_completed = !$task->is_completed;
+        $task->save();
+        return $task;
     }
 }

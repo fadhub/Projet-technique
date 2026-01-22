@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\PublicTaskController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
 // Routes publiques
@@ -21,17 +22,7 @@ Route::get('/admin/tasks/{task}/edit', [TaskController::class, 'edit'])->name('a
 Route::put('/admin/tasks/{task}', [TaskController::class, 'update'])->name('admin.tasks.update');
 Route::delete('/admin/tasks/{task}', [TaskController::class, 'destroy'])->name('admin.tasks.destroy');
 Route::get('/admin/tasks/{task}', [TaskController::class, 'show'])->name('admin.tasks.show');
+Route::patch('/admin/tasks/{task}/toggle', [TaskController::class, 'toggle'])->name('admin.tasks.toggle');
+
 // Redirection de /admin vers la liste des tâches
 Route::redirect('/admin', '/admin/tasks');
-// Route pour changer de langue
-Route::get('language/{locale}', function ($locale) {
-    if (!in_array($locale, ['en', 'fr'])) {
-        abort(400, 'Langue non supportée');
-    }
-    
-    // Stocker la langue dans la session
-    session(['locale' => $locale]);
-    
-    // Rediriger vers la page précédente
-    return redirect()->back()->with('success', __('messages.language_changed'));
-})->name('language.switch');

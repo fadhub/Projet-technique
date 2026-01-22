@@ -1,36 +1,25 @@
 document.addEventListener('DOMContentLoaded', function () {
+    console.log('Admin Tasks JS chargé');
+
     const searchInput = document.getElementById('searchInput');
+    const categoryFilter = document.getElementById('categoryFilter');
+    const statusFilter = document.getElementById('statusFilter');
     const tasksTableBody = document.getElementById('tasksTableBody');
-    const filterForm = document.getElementById('filterForm');
-    const categorySelect = filterForm ? filterForm.querySelector('select') : null;
 
-    // --- Recherche AJAX ---
-    if (searchInput && tasksTableBody) {
-        let timeout = null;
-        searchInput.addEventListener('input', function () {
-            clearTimeout(timeout);
-            timeout = setTimeout(function () {
-                const searchValue = searchInput.value;
-                const categoryValue = categorySelect ? categorySelect.value : '';
-                fetchTasks(searchValue, categoryValue);
-            }, 300);
-        });
-    }
+    // --- Recherche & Filtres AJAX ---
+    function filterTasks() {
+        if (!tasksTableBody) return;
 
-    if (categorySelect) {
-        categorySelect.addEventListener('change', function () {
-            const searchValue = searchInput ? searchInput.value : '';
-            const categoryValue = categorySelect.value;
-            fetchTasks(searchValue, categoryValue);
-        });
-    }
+        const search = searchInput ? searchInput.value : '';
+        const category_id = categoryFilter ? categoryFilter.value : '';
+        const is_completed = statusFilter ? statusFilter.value : '';
 
-    function fetchTasks(search, categoryId) {
-        const fetchUrl = new URL(window.location.protocol + '//' + window.location.host + window.location.pathname);
-        if (search) fetchUrl.searchParams.set('search', search);
-        if (categoryId) fetchUrl.searchParams.set('category_id', categoryId);
+        const url = new URL(window.location.href);
+        url.searchParams.set('search', search);
+        url.searchParams.set('category_id', category_id);
+        url.searchParams.set('is_completed', is_completed);
 
-        fetch(fetchUrl, {
+        fetch(url, {
             headers: { 'X-Requested-With': 'XMLHttpRequest' }
         })
             .then(response => response.text())
@@ -40,68 +29,81 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(error => console.error('Error fetching tasks:', error));
     }
 
-    // --- Modale : Ajouter une tâche ---
-    const openModalBtn = document.getElementById('openModalBtn');
-    const closeModalBtn = document.getElementById('closeModalBtn');
-    const cancelModalBtn = document.getElementById('cancelModalBtn');
-    const addTaskModal = document.getElementById('addTaskModal');
-
-    if (openModalBtn && addTaskModal) {
-        openModalBtn.addEventListener('click', () => {
-            addTaskModal.classList.remove('hidden');
-        });
-
-        const closeAddModal = () => {
-            addTaskModal.classList.add('hidden');
-        };
-
-        if (closeModalBtn) closeModalBtn.addEventListener('click', closeAddModal);
-        if (cancelModalBtn) cancelModalBtn.addEventListener('click', closeAddModal);
-
-        addTaskModal.addEventListener('click', (event) => {
-            if (event.target === addTaskModal) closeAddModal();
+    if (searchInput) {
+        let timeout = null;
+        searchInput.addEventListener('input', () => {
+            clearTimeout(timeout);
+            timeout = setTimeout(filterTasks, 300);
         });
     }
 
-    // --- Modale : Modifier une tâche ---
-    const editTaskModal = document.getElementById('editTaskModal');
-    const editTaskForm = document.getElementById('editTaskForm');
-    const closeEditModalBtn = document.getElementById('closeEditModalBtn');
-    const cancelEditModalBtn = document.getElementById('cancelEditModalBtn');
+    if (categoryFilter) categoryFilter.addEventListener('change', filterTasks);
+    if (statusFilter) statusFilter.addEventListener('change', filterTasks);
 
-    if (tasksTableBody && editTaskModal) {
-        // Délégation d'événement car le tableau change avec l'AJAX
-        tasksTableBody.addEventListener('click', (e) => {
-            const btn = e.target.closest('.open-edit-modal');
-            if (btn) {
-                const id = btn.getAttribute('data-id');
-                const title = btn.getAttribute('data-title');
-                const description = btn.getAttribute('data-description');
-                const categories = JSON.parse(btn.getAttribute('data-categories') || '[]');
+    // --- Gestion de la Modale Task ---
+    const taskModalEl = document.getElementById('task-modal');
+    const taskForm = document.getElementById('task-form');
+    const modalTitle = document.getElementById('modal-title');
+    const methodField = document.getElementById('method-field');
 
-                // Remplissage du formulaire
-                editTaskForm.action = `/admin/tasks/${id}`;
-                document.getElementById('edit_title').value = title;
-                document.getElementById('edit_description').value = description;
+    // Fonction globale pour ouvrir en mode création
+    window.openCreateModal = function () {
+        console.log('Ouverture modale création');
+        if (!taskForm) {
+            console.error('Formulaire task-form introuvable');
+            return;
+        }
 
-                // Cocher les catégories
-                document.querySelectorAll('.edit-category-checkbox').forEach(cb => {
-                    cb.checked = categories.includes(parseInt(cb.value));
-                });
+        modalTitle.innerText = "Ajouter une tâche";
+        taskForm.action = "/admin/tasks";
+        methodField.innerHTML = "";
+        taskForm.reset();
 
-                editTaskModal.classList.remove('hidden');
-            }
+        const completedCheck = document.getElementById('task-completed');
+        if (completedCheck) completedCheck.checked = false;
+
+        // Ouvrir via Preline
+        if (window.HSOverlay) {
+            HSOverlay.open(taskModalEl);
+        }
+
+        // Sécurité pour forcer l'affichage si Preline est capricieux
+        taskModalEl.classList.remove('hidden');
+    };
+
+    // Fonction globale pour ouvrir en mode édition
+    window.openEditModal = function (task, categoryIds) {
+        console.log('Ouverture modale édition', task);
+        if (!taskForm) return;
+
+        modalTitle.innerText = "Modifier la tâche";
+        taskForm.action = `/admin/tasks/${task.id}`;
+        methodField.innerHTML = '<input type="hidden" name="_method" value="PUT">';
+
+        document.getElementById('task-title').value = task.title;
+        document.getElementById('task-description').value = task.description || '';
+
+        // Cocher les catégories correspondantes
+        const checkboxes = document.querySelectorAll('.category-checkbox');
+        checkboxes.forEach(cb => {
+            cb.checked = categoryIds.includes(parseInt(cb.value));
         });
 
-        const closeEditModal = () => {
-            editTaskModal.classList.add('hidden');
-        };
+        const completedCheck = document.getElementById('task-completed');
+        if (completedCheck) completedCheck.checked = !!task.is_completed;
 
-        if (closeEditModalBtn) closeEditModalBtn.addEventListener('click', closeEditModal);
-        if (cancelEditModalBtn) cancelEditModalBtn.addEventListener('click', closeEditModal);
+        if (window.HSOverlay) {
+            HSOverlay.open(taskModalEl);
+        }
 
-        editTaskModal.addEventListener('click', (event) => {
-            if (event.target === editTaskModal) closeEditModal();
-        });
-    }
+        taskModalEl.classList.remove('hidden');
+    };
+
+    window.closeTaskModal = function () {
+        if (window.HSOverlay) {
+            HSOverlay.close(taskModalEl);
+        }
+        taskModalEl.classList.add('hidden');
+    };
 });
+

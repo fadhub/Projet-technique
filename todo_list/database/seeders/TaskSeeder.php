@@ -25,7 +25,6 @@ class TaskSeeder extends Seeder
                 'description'  => $data['description'] === 'null' ? null : $data['description'],
                 'image'        => $data['image'] === 'null' ? null : $data['image'],
                 'is_completed' => (bool) $data['is_completed'],
-                'user_id'      => $data['user_id'],
                 'created_at'   => $data['created_at'],
                 'updated_at'   => $data['updated_at'],
             ]);

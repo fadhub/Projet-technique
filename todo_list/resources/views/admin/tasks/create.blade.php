@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('admin.layouts.app')
 
 @section('content')
 <div class="container mx-auto px-4 py-8 max-w-2xl">
     <h1 class="text-2xl font-bold mb-8">Nouvelle tâche</h1>
     
-    <form action="{{ route('tasks.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+    <form action="{{ route('admin.tasks.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
         @csrf
         
         <div>
@@ -50,7 +50,7 @@
         </div>
 
         <div class="flex justify-end space-x-4">
-            <a href="{{ route('tasks.index') }}" 
+            <a href="{{ route('admin.tasks.index') }}" 
                class="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50">
                 Annuler
             </a>
