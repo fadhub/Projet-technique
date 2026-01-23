@@ -2,80 +2,121 @@
 @extends('admin.layouts.app')
 
 @section('content')
-<div class="space-y-6">
-    <!-- Header Page -->
-    <div class="flex justify-between items-center">
-        <div>
-            <h1 class="text-2xl font-bold text-gray-900">Gestion des Tâches</h1>
-            <p class="text-sm text-gray-500 mt-1">Ajouter, modifier, désactiver ou supprimer des tâches.</p>
-        </div>
-        <button type="button" 
-                onclick="openCreateModal()"
-                class="py-2.5 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
-            Ajouter une tâche
-        </button>
-    </div>
+<!-- Table Section -->
+<div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+  <!-- Card -->
+  <div class="flex flex-col">
+    <div class="-m-1.5 overflow-x-auto">
+      <div class="p-1.5 min-w-full inline-block align-middle">
+        <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden dark:bg-neutral-900 dark:border-neutral-700">
+          
+          <!-- Header -->
+          <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-neutral-700">
+            <div>
+              <h2 class="text-xl font-semibold text-gray-800 dark:text-neutral-200">
+                Gestion des Tâches
+              </h2>
+              <p class="text-sm text-gray-600 dark:text-neutral-400">
+                Gérez votre inventaire : ajoutez, modifiez ou supprimez vos tâches.
+              </p>
+            </div>
 
-    <!-- Filters & Table Section -->
-    <div class="bg-white border border-gray-100 rounded-3xl shadow-sm overflow-hidden">
-        <!-- Filters Area -->
-        <div class="p-6 border-b border-gray-50">
-            <div class="flex flex-wrap items-center gap-4">
-                <div class="relative flex-1 min-w-[240px]">
-                    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                        <svg class="w-4 h-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-                    </div>
-                    <input type="text" id="searchInput" class="py-2.5 ps-10 block w-full border-gray-100 rounded-lg text-sm bg-gray-50/50 focus:border-blue-500 focus:ring-blue-500 transition-all" placeholder="Rechercher par titre...">
-                </div>
+            <div>
+              <div class="inline-flex gap-x-2">
+                <button type="button" onclick="openCreateModal()" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+                  <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                  Ajouter une tâche
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- End Header -->
 
-                <select id="categoryFilter" class="py-2.5 px-4 block w-full md:w-48 border-gray-100 rounded-lg text-sm bg-gray-50/50 focus:border-blue-500 focus:ring-blue-500 transition-all">
-                    <option value="">Toutes les catégories</option>
+          <!-- Search & Filter -->
+          <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-neutral-700">
+             <div class="sm:col-span-1">
+               <label for="searchInput" class="sr-only">Search</label>
+               <div class="relative">
+                 <input type="text" id="searchInput" name="searchInput" class="py-2 px-3 ps-11 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Rechercher une tâche...">
+                 <div class="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-4">
+                   <svg class="shrink-0 size-4 text-gray-400 dark:text-neutral-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                 </div>
+               </div>
+             </div>
+             
+             <div class="sm:col-span-2 md:grow">
+               <div class="flex justify-end gap-x-2">
+                 <select id="categoryFilter" class="py-2 px-3 pe-9 block w-full md:w-auto border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                    <option value="">Catégories...</option>
                     @foreach($categories as $category)
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach
-                </select>
-
-                <select id="statusFilter" class="py-2.5 px-4 block w-full md:w-48 border-gray-100 rounded-lg text-sm bg-gray-50/50 focus:border-blue-500 focus:ring-blue-500 transition-all">
-                    <option value="">Tous les statuts</option>
+                 </select>
+                 
+                 <select id="statusFilter" class="py-2 px-3 pe-9 block w-full md:w-auto border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                    <option value="">Statut...</option>
                     <option value="1">Actif</option>
                     <option value="0">Inactif</option>
-                </select>
-            </div>
-        </div>
+                 </select>
+               </div>
+             </div>
+          </div>
+          <!-- End Search & Filter -->
 
-        <!-- Table Area -->
-        <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-100">
-                <thead class="bg-gray-50/30">
-                    <tr>
-                        <th scope="col" class="px-6 py-4 text-start text-xs font-bold text-gray-400 uppercase tracking-widest">Titre & Description</th>
-                        <th scope="col" class="px-6 py-4 text-start text-xs font-bold text-gray-400 uppercase tracking-widest">Catégorie</th>
-                        <th scope="col" class="px-6 py-4 text-start text-xs font-bold text-gray-400 uppercase tracking-widest">Statut</th>
-                        <th scope="col" class="px-6 py-4 text-end text-xs font-bold text-gray-400 uppercase tracking-widest">Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="tasksTableBody" class="divide-y divide-gray-100">
-                    @include('admin.tasks._table')
-                </tbody>
-            </table>
-        </div>
+          <!-- Table -->
+          <table class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
+            <thead class="bg-gray-50 dark:bg-neutral-800">
+              <tr>
+                <th scope="col" class="px-6 py-3 text-start">
+                  <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200">Image</span>
+                </th>
+                <th scope="col" class="px-6 py-3 text-start">
+                  <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200">Désignation</span>
+                </th>
+                <th scope="col" class="px-6 py-3 text-start">
+                  <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200">Statut</span>
+                </th>
+                <th scope="col" class="px-6 py-3 text-start">
+                   <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200">Catégorie</span>
+                </th>
+                <th scope="col" class="px-6 py-3 text-start">
+                   <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200">Description</span>
+                </th>
+                <th scope="col" class="px-6 py-3 text-end">
+                   <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200">Actions</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody id="tasksTableBody" class="divide-y divide-gray-200 dark:divide-neutral-700">
+               @include('admin.tasks._table')
+            </tbody>
+          </table>
+          <!-- End Table -->
 
-        <!-- Pagination -->
-        @if($tasks->hasPages())
-        <div class="px-6 py-4 border-t border-gray-50">
-            <div class="flex items-center justify-between">
-                <div class="text-sm text-gray-500 italic">
-                    Affichage de {{ $tasks->firstItem() }} à {{ $tasks->lastItem() }} sur {{ $tasks->total() }} résultats
-                </div>
-                <div>
-                   {{ $tasks->links('vendor.pagination.simple-tailwind') }}
-                </div>
+          <!-- Footer -->
+          @if($tasks->hasPages())
+          <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200 dark:border-neutral-700">
+            <div>
+              <p class="text-sm text-gray-600 dark:text-neutral-400">
+                Found <span class="font-semibold text-gray-800 dark:text-neutral-200">{{ $tasks->total() }}</span> results
+              </p>
             </div>
+            <div>
+              <div class="inline-flex gap-x-2">
+                 {{ $tasks->links('vendor.pagination.simple-tailwind') }}
+              </div>
+            </div>
+          </div>
+          @endif
+          <!-- End Footer -->
+          
         </div>
-        @endif
+      </div>
     </div>
+  </div>
+  <!-- End Card -->
 </div>
+<!-- End Table Section -->
 
 @include('admin.tasks._modal')
 
