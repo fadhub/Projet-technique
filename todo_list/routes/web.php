@@ -29,6 +29,4 @@ Route::patch('/admin/tasks/{task}/toggle', [TaskController::class, 'toggle'])->n
 // Redirection de /admin vers la liste des tâches
 Route::redirect('/admin', '/admin/tasks');
 
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

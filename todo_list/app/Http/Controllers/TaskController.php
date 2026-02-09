@@ -17,7 +17,7 @@ class TaskController extends Controller
 
     public function index(Request $request)
     {
-        $tasks = $this->taskService->getAll([], 1000); // On récupère un grand nombre pour le filtrage local
+        $tasks = $this->taskService->getAll([], 3); // On récupère 3 tâches pour tester la pagination
         $categories = \App\Models\Category::all();
         
         // On prépare les tâches pour Alpine (conversion en JSON)

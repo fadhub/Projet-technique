@@ -167,17 +167,8 @@
 
           <!-- Footer -->
           @if($tasks->hasPages())
-          <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200 dark:border-neutral-700">
-            <div>
-              <p class="text-sm text-gray-600 dark:text-neutral-400">
-                Found <span class="font-semibold text-gray-800 dark:text-neutral-200">{{ $tasks->total() }}</span> results
-              </p>
-            </div>
-            <div>
-              <div class="inline-flex gap-x-2">
-                 {{ $tasks->links('vendor.pagination.simple-tailwind') }}
-              </div>
-            </div>
+          <div class="px-6 py-4 border-t border-gray-200 dark:border-neutral-700">
+            {{ $tasks->links('vendor.pagination.custom') }}
           </div>
           @endif
           <!-- End Footer -->
