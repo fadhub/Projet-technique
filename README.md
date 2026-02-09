@@ -102,10 +102,10 @@ style: |
 
 ---
 
-## Contexte
+## Contexte : projet fin de formation
 Ce projet technique a pour objectif d'appliquer les connaissances acquises et de valider notre compréhension.
 
-#### Processus de Développement : 2TUP
+#### 2TUP
 
 ![center h:380](img_presentation/2TUP.png)
 
