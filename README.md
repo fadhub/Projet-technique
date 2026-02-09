@@ -84,6 +84,21 @@ style: |
 ![w:900 Waterfall](img_presentation/Waterfall.png)
 
 
+---
+
+## Travail à faire
+
+### Partie Publique
+*   Affichage des tâches en grille avec pagination.
+*   Consultation détaillée de chaque tâche.
+*   Interface responsive avec Tailwind CSS.
+
+### Partie Admin
+*   Gestion complète CRUD des tâches.
+*   Tableau de bord sécurisé.
+*   Modales pour ajouter/éditer avec validation.
+*   Architecture N-tier avec Services.
+
 
 ---
 
@@ -99,7 +114,7 @@ Ce projet technique a pour objectif d'appliquer les connaissances acquises et de
 ---
 
 
-# Analyse Technique
+# Exigences - Analyse Technique
 ## Technologies à Utilisée
 1. **Base de données** : Mysql.
 2. **Framework** : Laravel.
@@ -147,20 +162,25 @@ Ce projet technique a pour objectif d'appliquer les connaissances acquises et de
 
 ### Version 4
 
-- SPA (Single Page Application) / AJAX - Alpine.js
-- Branch : spa
+- SPA (Single Page Application) AJAX
+- Branch : spa AJAX
 
 ### Version 5
+
+- SPA (Single Page Application) Alpine.js
+- Branch : spa Alpine.js
+
+### Version 6
 
 - Spatie / Authorization
 - Branch : spatie
 
-### Version 6
+### Version 7
 
 - API
 - Branch : api
 
-### Version 7
+### Version 8
 
 - Mobile App
 - Branch : mobile
