@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-<html lang="fr" class="light">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Todo List') }}</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        [x-cloak] { display: none !important; }
         body { font-family: 'Inter', sans-serif; }
         .glass {
             background: rgba(255, 255, 255, 0.7);
@@ -24,10 +28,36 @@
                         TodoHub
                     </a>
                 </div>
+
                 <div class="flex items-center space-x-6">
                     <a href="{{ route('admin.tasks.index') }}" class="text-sm font-semibold text-gray-600 hover:text-blue-600 transition-colors">
                         Administration
                     </a>
+
+                    @guest
+                        @if (Route::has('login'))
+                            <a href="{{ route('login') }}" class="text-sm font-semibold text-gray-600 hover:text-blue-600 transition-colors">{{ __('Login') }}</a>
+                        @endif
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}" class="text-sm font-semibold text-gray-600 hover:text-blue-600 transition-colors">{{ __('Register') }}</a>
+                        @endif
+                    @else
+                        <div class="relative inline-flex" x-data="{ open: false }" @click.outside="open = false">
+                            <button @click="open = !open" class="text-sm font-semibold text-gray-600 hover:text-blue-600 transition-colors flex items-center gap-x-1">
+                                {{ Auth::user()->name }}
+                                <svg class="size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                            </button>
+                            <div x-show="open" x-cloak class="absolute right-0 top-full mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg py-1">
+                                <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                                    @csrf
+                                </form>
+                            </div>
+                        </div>
+                    @endguest
                 </div>
             </div>
         </div>
@@ -42,6 +72,5 @@
 
         @yield('content')
     </main>
-
 </body>
 </html>

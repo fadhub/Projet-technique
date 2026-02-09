@@ -4,6 +4,8 @@
 use App\Http\Controllers\PublicTaskController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+
 
 // Routes publiques
 Route::controller(PublicTaskController::class)->group(function () {
@@ -26,3 +28,7 @@ Route::patch('/admin/tasks/{task}/toggle', [TaskController::class, 'toggle'])->n
 
 // Redirection de /admin vers la liste des tâches
 Route::redirect('/admin', '/admin/tasks');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

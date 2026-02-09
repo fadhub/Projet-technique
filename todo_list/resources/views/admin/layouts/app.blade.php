@@ -46,6 +46,7 @@
         }
     </style>
     
+    @vite(['resources/js/app.js'])
     @yield('styles')
 </head>
 <body class="bg-gray-50 text-gray-900 min-h-screen">
@@ -61,7 +62,29 @@
                         Voir le site public
                     </a>
                 </div>
-                <div></div>
+                
+                <div class="flex items-center space-x-4">
+                    @auth
+                        <div class="relative inline-flex" x-data="{ open: false }" @click.outside="open = false">
+                            <button @click="open = !open" class="text-sm font-semibold text-gray-600 hover:text-blue-600 transition-colors flex items-center gap-x-1">
+                                <span class="size-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xs font-bold mr-1">
+                                    {{ substr(Auth::user()->name, 0, 1) }}
+                                </span>
+                                {{ Auth::user()->name }}
+                                <svg class="size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                            </button>
+                            <div x-show="open" x-cloak class="absolute right-0 top-full mt-2 w-48 bg-white border border-gray-100 rounded-lg shadow-lg py-1 z-[100]">
+                                <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                                    @csrf
+                                </form>
+                            </div>
+                        </div>
+                    @endauth
+                </div>
             </nav>
         </header>
 
