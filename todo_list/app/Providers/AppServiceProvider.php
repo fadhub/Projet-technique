@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +20,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Gate pour autoriser la suppression des tâches
+        // Fadna ne peut pas supprimer de tâches
+        Gate::define('delete-task', function ($user) {
+            return strtolower($user->email) !== 'fadna.lakhouchen@gmail.com'; 
+        });
     }
 }
