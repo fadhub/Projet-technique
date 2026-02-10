@@ -214,3 +214,5 @@ style: |
 ## **v8** : Mobile App
 
 * **Live Coding :** 
+---
+## Conclusion
