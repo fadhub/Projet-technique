@@ -73,22 +73,16 @@ style: |
 
 ---
 
-## Plan
+## **Plan**
 
-<div style="font-size: 20px;">
+1.  **Méthode Waterfall**
+2.  **Exigences :** Travail à faire
+3.  **Contexte :** Projet de Fin de Formation
+4.  **Analyse Technique**
+5.  **Analyse :** Analyse Fonctionnelle
+6.  **Conception**
+7.  **Versions (v1 - v8)**
 
-| | |
-| :--- | :--- |
-| 1. Méthode Waterfall | 9. v2 : Admin Side |
-| 2. Exigences : Travail à faire | 10. v3 : Authentification / Authorization |
-| 3. Contexte : projet fin de formation | 11. v4 : SPA / AJAX |
-| 4. Analyse Technique | 12. v5 : SPA / Alpine.js |
-| 5. Analyse Fonctionnelle | 13. v6 : Spatie / Authorization |
-| 6. Conception | 14. v7 : API |
-| 7. Versions | 15. v8 : Mobile App |
-| 8. v1 : Public Side | |
-
-</div>
 
 ---
 
