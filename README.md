@@ -103,9 +103,9 @@ style: |
 ---
 
 ## Contexte : projet fin de formation
-Ce projet technique a pour objectif d'appliquer les connaissances acquises et de valider notre compréhension.
+*   **Projet de Fin de Formation:** Ce projet technique a pour objectif d'appliquer les connaissances acquises et de valider notre compréhension.
 
-#### Processus de Développement : 2TUP
+#### Processus 2TUP
 
 ![center h:380](img_presentation/2TUP.png)
 
@@ -158,8 +158,6 @@ Ce projet technique a pour objectif d'appliquer les connaissances acquises et de
 
 ---
 
-<!-- Sujet de Live coding -->
-# Sujet de Live coding
 ## **v1** Public Side - Live Coding
 * Creation du portfolio personnel
 
