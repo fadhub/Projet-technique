@@ -72,9 +72,23 @@ style: |
 </div>
 
 ---
-## Choix du sujet
 
- gestion de tâches simple et efficace pour organiser vos activités quotidiennes.
+## Plan
+
+<div style="font-size: 20px;">
+
+| | |
+| :--- | :--- |
+| 1. Méthode Waterfall | 9. v2 : Admin Side |
+| 2. Exigences : Travail à faire | 10. v3 : Authentification / Authorization |
+| 3. Contexte : projet fin de formation | 11. v4 : SPA / AJAX |
+| 4. Analyse Technique | 12. v5 : SPA / Alpine.js |
+| 5. Analyse Fonctionnelle | 13. v6 : Spatie / Authorization |
+| 6. Conception | 14. v7 : API |
+| 7. Versions | 15. v8 : Mobile App |
+| 8. v1 : Public Side | |
+
+</div>
 
 ---
 
@@ -115,7 +129,7 @@ style: |
 
 
 # Analyse Technique
-## Technologies à Utilisée
+### Technologies à Utilisée
 1. **Base de données** : Mysql.
 2. **Framework** : Laravel.
 3. **Architecture N-tier** : Services.
@@ -124,6 +138,7 @@ style: |
 6. **AJAX** : Interactivité fluide sans rechargement.
 7. **Gestion des Images** : Upload et stockage sécurisé.
 8. **Internationalisation** : Support multilingue de l'interface.
+---
 9. **Vite** : Optimisation des performances.
 10. **Preline UI** : Intégration d'un design système moderne.
 11. **Lucide Library**
@@ -158,41 +173,50 @@ style: |
 
 ---
 
-## **v1** Public Side - Live Coding
-* Creation du portfolio personnel
+## **v1** : Public Side
+
+* **Live Coding :** Création du portfolio personnel
 
 ---
 
-## **v2** Admin Side - Live Coding
-* Gestion des articles (CRUD)
+## **v2** : Admin Side
+
+* **Live Coding :** Gestion des articles (CRUD)
 
 ---
 
-## **v3** Authentification / Authorization - Live Coding
-* 
+## **v3** : Authentification / Authorization
+
+* **Live Coding :** 
 
 ---
 
-## **v4** SPA / AJAX - Live Coding
-* Un bouton “Ajouter” qui ouvre une modale pour créer un nouvel élément. <br>
-* Une barre de recherche filtrant des éléments par titre.
+## **v4** : SPA / AJAX
+
+* **Live Coding :** 
+  - Bouton “Ajouter” via modale
+  - Barre de recherche dynamique
 
 ---
 
-## **v5** SPA / Alpine.js - Live Coding
-* 
+## **v5** : SPA / Alpine.js
+
+* **Live Coding :** 
 
 ---
 
-## **v6** Spatie / Authorization - Live Coding
-* 
+## **v6** : Spatie / Authorization
+
+* **Live Coding :**
 
 ---
 
-## **v7** API - Live Coding
-* 
+## **v7** : API
+
+* **Live Coding :** 
 
 ---
 
-## **v8** Mobile App - Live Coding
-* 
+## **v8** : Mobile App
+
+* **Live Coding :** 
