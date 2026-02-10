@@ -1,18 +1,54 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-md w-full space-y-8">
-        <div>
-            <h2 class="mt-6 text-center text-3xl font-extrabold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                {{ __('Connexion') }}
-            </h2>
-            <p class="mt-2 text-center text-sm text-gray-600">
-                {{ __('Connectez-vous pour accéder à votre espace') }}
-            </p>
-        </div>
-
-        <div class="glass rounded-xl shadow-2xl p-8">
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>{{ __('Connexion') }} - {{ config('app.name', 'Todo List') }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=400;500;600;700&display=swap" rel="stylesheet">
+    @vite(['resources/css/app.css'])
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9fafb;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .login-container {
+            width: 100%;
+            max-width: 420px;
+            padding: 0 1rem;
+        }
+        .login-box {
+            background: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            padding: 2.5rem;
+            border: 1px solid #e5e7eb;
+        }
+        @media (max-width: 480px) {
+            .login-box {
+                padding: 1.5rem;
+                margin: 0 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <div class="text-center mb-8">
+                <h2 class="text-2xl font-bold text-gray-900">
+                    {{ __('Connexion') }}
+                </h2>
+                <p class="mt-2 text-sm text-gray-600">
+                    {{ __('Connectez-vous pour accéder à votre espace') }}
+                </p>
+            </div>
             <form method="POST" action="{{ route('login') }}" class="space-y-6">
                 @csrf
 
@@ -91,19 +127,18 @@
                     </button>
                 </div>
 
-                <!-- Register Link -->
-                @if (Route::has('register'))
-                    <div class="text-center">
-                        <p class="text-sm text-gray-600">
-                            {{ __("Vous n'avez pas de compte ?") }}
-                            <a href="{{ route('register') }}" class="font-medium text-blue-600 hover:text-blue-500 transition-colors">
-                                {{ __('Créer un compte') }}
-                            </a>
-                        </p>
-                    </div>
-                @endif
+                <!-- Register Link Moved to Bottom of Card -->
             </form>
         </div>
+        
+        @if (Route::has('register'))
+            <div class="text-center text-sm text-gray-600 mt-4">
+                {{ __("Vous n'avez pas de compte ?") }}
+                <a href="{{ route('register') }}" class="font-medium text-blue-600 hover:text-blue-500 transition-colors">
+                    {{ __('Créer un compte') }}
+                </a>
+            </div>
+        @endif
     </div>
-</div>
-@endsection
+</body>
+</html>

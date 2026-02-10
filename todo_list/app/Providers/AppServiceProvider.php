@@ -21,9 +21,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // Gate pour autoriser la suppression des tâches
-        // Fadna ne peut pas supprimer de tâches
+        // Seul l'administrateur peut supprimer
         Gate::define('delete-task', function ($user) {
-            return strtolower($user->email) !== 'fadna.lakhouchen@gmail.com'; 
+            return $user->role === 'admin';
         });
     }
 }

@@ -91,6 +91,8 @@ class TaskController extends Controller
 
     public function destroy($id)
     {
+        \Illuminate\Support\Facades\Gate::authorize('delete-task');
+        
         $this->taskService->delete($id);
         return redirect()->route('admin.tasks.index')->with('success', 'Task deleted successfully.');
     }

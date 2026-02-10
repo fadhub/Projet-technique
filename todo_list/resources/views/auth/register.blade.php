@@ -1,18 +1,91 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-md w-full space-y-8">
-        <div>
-            <h2 class="mt-6 text-center text-3xl font-extrabold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                {{ __('Créer un compte') }}
-            </h2>
-            <p class="mt-2 text-center text-sm text-gray-600">
-                {{ __('Rejoignez-nous pour gérer vos tâches') }}
-            </p>
-        </div>
-
-        <div class="glass rounded-xl shadow-2xl p-8">
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>{{ __('Créer un compte') }} - {{ config('app.name', 'Todo List') }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=400;500;600;700&display=swap" rel="stylesheet">
+    @vite(['resources/css/app.css'])
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9fafb;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .register-container {
+            width: 100%;
+            max-width: 400px;
+            padding: 0 1rem;
+        }
+        .register-box {
+            background: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            padding: 2.5rem;
+            border: 1px solid #e5e7eb;
+        }
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        .btn-primary {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            font-size: 0.875rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: background-color 0.2s;
+        }
+        .btn-primary:hover {
+            background-color: #2563eb;
+        }
+        .text-muted {
+            color: #6b7280;
+            font-size: 0.75rem;
+            margin-top: 0.25rem;
+        }
+        @media (max-width: 480px) {
+            .register-box {
+                padding: 1.5rem;
+                margin: 0 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <div class="register-box">
+            <div class="text-center mb-8">
+                <h2 class="text-2xl font-bold text-gray-900">
+                    {{ __('Créer un compte') }}
+                </h2>
+                <p class="mt-2 text-sm text-gray-600">
+                    {{ __('Rejoignez-nous pour gérer vos tâches') }}
+                </p>
+            </div>
             <form method="POST" action="{{ route('register') }}" class="space-y-6">
                 @csrf
 
@@ -95,28 +168,26 @@
 
                 <!-- Submit Button -->
                 <div>
-                    <button 
-                        type="submit" 
-                        class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-                    >
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                    <button type="submit" class="btn-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                         </svg>
                         {{ __('Créer mon compte') }}
                     </button>
                 </div>
 
                 <!-- Login Link -->
-                <div class="text-center">
-                    <p class="text-sm text-gray-600">
-                        {{ __('Vous avez déjà un compte ?') }}
-                        <a href="{{ route('login') }}" class="font-medium text-blue-600 hover:text-blue-500 transition-colors">
-                            {{ __('Se connecter') }}
-                        </a>
-                    </p>
+                <div class="mt-6 text-center text-sm">
+                    <span class="text-gray-600">{{ __('Déjà inscrit ?') }}</span>
+                    <a href="{{ route('login') }}" class="font-medium text-blue-600 hover:text-blue-500 ml-1">
+                        {{ __('Se connecter') }}
+                    </a>
                 </div>
             </form>
         </div>
     </div>
 </div>
-@endsection
+        </div>
+    </div>
+</body>
+</html>

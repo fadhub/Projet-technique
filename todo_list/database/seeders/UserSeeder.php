@@ -21,7 +21,8 @@ class UserSeeder extends Seeder
                 ['email' => $data['email']],  
                 [
                     'name' => $data['name'],
-                    'password' => Hash::make($data['password']),
+                    'role' => $data['role'] ?? 'user',
+                    'password' => $data['password'], // Assuming CSV has the hash
                 ]
             );
         }
