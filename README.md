@@ -72,9 +72,17 @@ style: |
 </div>
 
 ---
-## Choix du sujet
 
- gestion de tâches simple et efficace pour organiser vos activités quotidiennes.
+## **Plan**
+
+1.  **Méthode Waterfall**
+2.  **Exigences :** Travail à faire
+3.  **Contexte :** Projet de Fin de Formation
+4.  **Analyse Technique**
+5.  **Analyse :** Analyse Fonctionnelle
+6.  **Conception**
+7.  **Versions (v1 - v8)**
+
 
 ---
 
@@ -103,9 +111,9 @@ style: |
 ---
 
 ## Contexte : projet fin de formation
-Ce projet technique a pour objectif d'appliquer les connaissances acquises et de valider notre compréhension.
+*   **Projet de Fin de Formation:** Ce projet technique a pour objectif d'appliquer les connaissances acquises et de valider notre compréhension.
 
-#### Processus de Développement : 2TUP
+#### Processus 2TUP
 
 ![center h:380](img_presentation/2TUP.png)
 
@@ -115,7 +123,7 @@ Ce projet technique a pour objectif d'appliquer les connaissances acquises et de
 
 
 # Analyse Technique
-## Technologies à Utilisée
+### Technologies à Utilisée
 1. **Base de données** : Mysql.
 2. **Framework** : Laravel.
 3. **Architecture N-tier** : Services.
@@ -124,6 +132,7 @@ Ce projet technique a pour objectif d'appliquer les connaissances acquises et de
 6. **AJAX** : Interactivité fluide sans rechargement.
 7. **Gestion des Images** : Upload et stockage sécurisé.
 8. **Internationalisation** : Support multilingue de l'interface.
+---
 9. **Vite** : Optimisation des performances.
 10. **Preline UI** : Intégration d'un design système moderne.
 11. **Lucide Library**
@@ -158,43 +167,52 @@ Ce projet technique a pour objectif d'appliquer les connaissances acquises et de
 
 ---
 
-<!-- Sujet de Live coding -->
-# Sujet de Live coding
-## **v1** Public Side - Live Coding
-* Creation du portfolio personnel
+## **v1** : Public Side
+
+* **Live Coding :** Création du portfolio personnel
 
 ---
 
-## **v2** Admin Side - Live Coding
-* Gestion des articles (CRUD)
+## **v2** : Admin Side
+
+* **Live Coding :** Gestion des articles (CRUD)
 
 ---
 
-## **v3** Authentification / Authorization - Live Coding
-* 
+## **v3** : Authentification / Authorization
+
+* **Live Coding :** 
 
 ---
 
-## **v4** SPA / AJAX - Live Coding
-* Un bouton “Ajouter” qui ouvre une modale pour créer un nouvel élément. <br>
-* Une barre de recherche filtrant des éléments par titre.
+## **v4** : SPA / AJAX
+
+* **Live Coding :** 
+  - Bouton “Ajouter” via modale
+  - Barre de recherche dynamique
 
 ---
 
-## **v5** SPA / Alpine.js - Live Coding
-* 
+## **v5** : SPA / Alpine.js
+
+* **Live Coding :** 
 
 ---
 
-## **v6** Spatie / Authorization - Live Coding
-* 
+## **v6** : Spatie / Authorization
+
+* **Live Coding :**
 
 ---
 
-## **v7** API - Live Coding
-* 
+## **v7** : API
+
+* **Live Coding :** 
 
 ---
 
-## **v8** Mobile App - Live Coding
-* 
+## **v8** : Mobile App
+
+* **Live Coding :** 
+---
+## Conclusion
