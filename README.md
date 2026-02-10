@@ -84,10 +84,25 @@ style: |
 ![w:900 Waterfall](img_presentation/Waterfall.png)
 
 
+---
+
+## Exigences - Travail à faire
+
+### Partie Publique
+*   Affichage des tâches en grille avec pagination.
+*   Consultation détaillée de chaque tâche.
+*   Interface responsive avec Tailwind CSS.
+
+### Partie Admin
+*   Gestion complète CRUD des tâches.
+*   Tableau de bord sécurisé.
+*   Modales pour ajouter/éditer avec validation.
+*   Architecture N-tier avec Services.
+
 
 ---
 
-## Contexte
+## Contexte : projet fin de formation
 Ce projet technique a pour objectif d'appliquer les connaissances acquises et de valider notre compréhension.
 
 #### Processus de Développement : 2TUP
@@ -114,7 +129,7 @@ Ce projet technique a pour objectif d'appliquer les connaissances acquises et de
 11. **Lucide Library**
 12. **Tailwind CSS** : Framework CSS utilitaire pour un design réactif et moderne.
 ---
-## Fonctionnalités
+## Analyse Fonctionnelle
 
 ![center](img_presentation/use_case.png)
 
@@ -130,44 +145,56 @@ Ce projet technique a pour objectif d'appliquer les connaissances acquises et de
 
 ## Versions
 
-### Version 1
-
-- Public Side
-- Branch : public
-
-### Version 2
-
-- Admin Side
-- Branch : admin
-
-### Version 3
-
-- Authontification / Authorization (Gates)
-- Branch : gates
-
-### Version 4
-
-- SPA (Single Page Application) / AJAX - Alpine.js
-- Branch : spa
-
-### Version 5
-
-- Spatie / Authorization
-- Branch : spatie
-
-### Version 6
-
-- API
-- Branch : api
-
-### Version 7
-
-- Mobile App
-- Branch : mobile
+| Version | Description | Branche |
+| :--- | :--- | :--- |
+| **v1** | Public Side (Consultation, Recherche, Filtre) | `public` |
+| **v2** | Admin Side (CRUD, Modales) | `admin` |
+| **v3** | Authentification / Authorization (Gates) | `gates` |
+| **v4** | SPA / AJAX | `spa-ajax` |
+| **v5** | SPA / Alpine.js | `spa-alpine` |
+| **v6** | Spatie / Authorization | `spatie` |
+| **v7** | API | `api` |
+| **v8** | Mobile App | `mobile` |
 
 ---
 
-## Sujet Live Coding
+<!-- Sujet de Live coding -->
+# Sujet de Live coding
+## **v1** Public Side - Live Coding
+* Creation du portfolio personnel
 
-- Ajouter avec un pop-up modal (AJAX).
-- Rechercher les tâches.
+---
+
+## **v2** Admin Side - Live Coding
+* Gestion des articles (CRUD)
+
+---
+
+## **v3** Authentification / Authorization - Live Coding
+* 
+
+---
+
+## **v4** SPA / AJAX - Live Coding
+* Un bouton “Ajouter” qui ouvre une modale pour créer un nouvel élément. <br>
+* Une barre de recherche filtrant des éléments par titre.
+
+---
+
+## **v5** SPA / Alpine.js - Live Coding
+* 
+
+---
+
+## **v6** Spatie / Authorization - Live Coding
+* 
+
+---
+
+## **v7** API - Live Coding
+* 
+
+---
+
+## **v8** Mobile App - Live Coding
+* 
