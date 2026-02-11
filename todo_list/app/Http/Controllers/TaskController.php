@@ -17,28 +17,21 @@ class TaskController extends Controller
 
     public function index(Request $request)
     {
-        $tasks = $this->taskService->getAll([], 3); // On récupère 3 tâches pour tester la pagination
+        $filters = [
+            'search' => $request->query('search'),
+            'category_id' => $request->query('category_id'),
+            'is_completed' => $request->query('status')
+        ];
+
+        $tasks = $this->taskService->getAll($filters, 5);
+        
+        if ($request->ajax()) {
+            return view('admin.tasks._table_container', compact('tasks'))->render();
+        }
+
         $categories = \App\Models\Category::all();
         
-        // On prépare les tâches pour Alpine (conversion en JSON)
-        $tasksJson = $tasks->getCollection()->map(function($task) {
-            return [
-                'id' => $task->id,
-                'title' => $task->title,
-                'description' => $task->description,
-                'is_completed' => (bool)$task->is_completed,
-                'image' => $task->image ? asset('storage/' . $task->image) : null,
-                'category_ids' => $task->categories->pluck('id')->toArray(),
-                'category_names' => $task->categories->pluck('name')->toArray(),
-                'raw_task' => $task // Pour l'édition
-            ];
-        });
-
-        return view('admin.tasks.index', [
-            'tasks' => $tasks,
-            'categories' => $categories,
-            'tasksJson' => $tasksJson
-        ]);
+        return view('admin.tasks.index', compact('tasks', 'categories'));
     }
 
     public function create()

@@ -23,7 +23,7 @@ class TaskController extends Controller
         $tasks = $this->taskService->index(2, $categoryId, $search);
         
         if ($request->ajax()) {
-            return view('admin.tasks._table', compact('tasks'))->render();
+            return view('admin.tasks._table_container', compact('tasks'))->render();
         }
 
         $categories = Category::all();

@@ -44,7 +44,9 @@
     <!-- Actions -->
     <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
         <button type="button" 
-                onclick="window.dispatchEvent(new CustomEvent('open-edit-modal', { detail: { task: @json($task), categories: @json($task->categories->pluck('id')) } }))"
+                data-task="{{ json_encode($task) }}"
+                data-categories="{{ json_encode($task->categories->pluck('id')) }}"
+                onclick="window.dispatchEvent(new CustomEvent('open-edit-modal', { detail: { task: JSON.parse(this.dataset.task), categories: JSON.parse(this.dataset.categories) } }))"
                 class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400">
             <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
         </button>

@@ -54,6 +54,15 @@
           
           <div>
             <label for="task-image" class="block text-sm font-medium mb-2 dark:text-neutral-200">Image</label>
+            
+            <!-- Image Preview -->
+            <template x-if="task.current_image">
+              <div class="mb-3">
+                <p class="text-xs text-gray-500 mb-1 dark:text-neutral-400">Image actuelle :</p>
+                <img :src="task.current_image" alt="Aperçu" class="w-32 h-32 object-cover rounded-lg border border-gray-200 dark:border-neutral-700">
+              </div>
+            </template>
+
             <input type="file" name="image" id="task-image" class="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none file:bg-gray-50 file:border-0 file:me-4 file:py-3 file:px-4 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 file:dark:bg-neutral-700 file:dark:text-neutral-400">
           </div>
           
