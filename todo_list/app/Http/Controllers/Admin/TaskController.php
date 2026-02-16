@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\TaskService;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
@@ -20,7 +21,8 @@ class TaskController extends Controller
     {
         $categoryId = $request->query('category_id');
         $search = $request->query('search');
-        $tasks = $this->taskService->index(2, $categoryId, $search);
+        $filters = ['category_id' => $categoryId, 'search' => $search];
+        $tasks = $this->taskService->getAll($filters, 2);
         
         if ($request->ajax()) {
             return view('admin.tasks._table_container', compact('tasks'))->render();
@@ -46,8 +48,13 @@ class TaskController extends Controller
             'category_ids.*' => 'exists:categories,id',
         ]);
 
-        $data['user_id'] = auth()->id() ?? \App\Models\User::first()->id; // Fallback to first user for demo/testing
-        $task = $this->taskService->store($data);
+        $userId = Auth::id();
+        if (!$userId) {
+            $user = \App\Models\User::first();
+            $userId = $user ? $user->getAttribute('id') : null;
+        }
+        $data['user_id'] = $userId;
+        $task = $this->taskService->create($data);
 
         if (!empty($data['category_ids'])) {
             $task->categories()->sync($data['category_ids']);

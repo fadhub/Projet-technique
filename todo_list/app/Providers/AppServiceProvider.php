@@ -20,6 +20,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        //il faut ajouter manage dans spartie
         // Gate pour autoriser la suppression des tâches
         // Seul l'administrateur peut supprimer
         Gate::define('delete-task', function ($user) {
