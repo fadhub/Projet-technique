@@ -1,45 +1,55 @@
-{{-- admin/tasks/index.blade.php --}}
-@extends('admin.layouts.app')
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>{{ __('tasks.title') }}</title>
+</head>
+<body>
 
-@section('content')
-<div class="bg-white shadow rounded-lg overflow-hidden">
-    <div class="px-4 py-5 sm:px-6 flex justify-between items-center">
-        <h2 class="text-xl font-semibold text-gray-900">Liste des tâches</h2>
-        <a href="{{ route('tasks.create') }}" 
-           class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-            Ajouter une tâche
-        </a>
-    </div>
-    <div class="border-t border-gray-200">
-        <!-- Contenu de la liste des tâches -->
-        @foreach($tasks as $task)
-            <div class="px-4 py-4 sm:px-6 border-b border-gray-200">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <h3 class="text-lg font-medium text-gray-900">{{ $task->title }}</h3>
-                        <p class="text-sm text-gray-500">{{ $task->description }}</p>
-                    </div>
-                    <div class="flex space-x-2">
-                        <a href="{{ route('tasks.show', $task) }}" 
-                           class="text-blue-500 hover:text-blue-700">Voir</a>
-                        <a href="{{ route('tasks.edit', $task) }}" 
-                           class="text-yellow-500 hover:text-yellow-700">Modifier</a>
-                        <form action="{{ route('tasks.destroy', $task) }}" method="POST" class="inline">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" 
-                                    class="text-red-500 hover:text-red-700"
-                                    onclick="return confirm('Êtes-vous sûr ?')">
-                                Supprimer
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        @endforeach
-    </div>
-    <div class="px-4 py-4 sm:px-6">
-        {{ $tasks->links() }}
+<h1>{{ __('tasks.title') }}</h1>
+
+
+<div>
+    <input type="text" id="search" placeholder="{{ __('tasks.search_placeholder') }}">
+    <button id="openModal">{{ __('tasks.add') }}</button>
+</div>
+
+<div id="tasksTable">
+    @include('tasks.partials.table')
+</div>
+
+<!-- Add modal (basic vanilla) -->
+<div id="modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.3);">
+    <div style="background:#fff; max-width:480px; margin:6rem auto; padding:1rem;">
+        <button id="add-modal-close" style="float:right;">&times;</button>
+        <h3>{{ __('tasks.add') }}</h3>
+        <div>
+            <label>{{ __('tasks.title_label') }}</label>
+            <input type="text" id="taskTitle" style="width:100%;" />
+        </div>
+        <div style="margin-top:8px;">
+            <button id="saveTask">{{ __('tasks.save') }}</button>
+        </div>
     </div>
 </div>
-@endsection
+
+<!-- View modal for a task -->
+<div id="task-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.3);">
+    <div style="background:#fff; max-width:640px; margin:6rem auto; padding:1rem;">
+        <button id="modal-close" style="float:right;">&times;</button>
+        <h2 id="modal-title">{{ __('tasks.view') }}</h2>
+        <div id="modal-body">
+            <p><strong>ID:</strong> <span id="task-id"></span></p>
+            <p><strong>{{ __('tasks.title_label') }}:</strong> <span id="task-title"></span></p>
+            <p><strong>{{ __('tasks.description') }}:</strong> <span id="task-desc"></span></p>
+            <p><strong>{{ __('tasks.user') }}:</strong> <span id="task-user"></span></p>
+            <p><strong>{{ __('tasks.done') }}:</strong> <span id="task-completed"></span></p>
+            <p><strong>{{ __('tasks.created') }}:</strong> <span id="task-created"></span></p>
+        </div>
+    </div>
+</div>
+
+<script src="{{ asset('js/admin/tasks.js') }}"></script>
+</body>
+</html>
